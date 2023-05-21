@@ -22,9 +22,9 @@ app.use(express.urlencoded({ extended: false}));
 app.use(express.static(path.join(__dirname, "public")))
 
 
-// app.get('/', function (req, res) {
-//   res.send('')
-// })
+app.get('/api/v1/login', function (req, res) {
+  res.redirect("/login.html");
+})
 
 
 

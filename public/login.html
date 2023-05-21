@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+    <title>いっぽん</title>
+    <!-- CSSの読み込み -->
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/dotsAnimation.css">
+</head>
+<body>
+  <div class="wrapper">
+  	<div class="h1_animation">
+    <h1>ippon</h1>
+	    <div class="container">
+	      <div class="ball ball-animation"></div>
+	      <div class="ball ball-animation"></div>
+	      <div class="ball ball-animation"></div>
+	      <div class="ball ball-animation"></div>
+	      <div class="ball ball-animation"></div>
+	      <div class="ball ball-animation"></div>
+	      <div class="ball ball-animation"></div>
+	    </div>
+  	</div>
+
+    <form th:action="@{/login}" th:object="${loginInfo}" method="POST">
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" th:field="*{username}" required />
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" th:field="*{password}" required />
+        </div>
+        
+        <th:block th:if="${errorMessage != null}">
+	        	<p class="error-message" th:text="${errorMessage}"></p>
+	    </th:block>
+	    
+        <div>
+            <input type="submit" value="Login" />
+        </div>
+    </form>
+  </div>
+</body>
+</html>
