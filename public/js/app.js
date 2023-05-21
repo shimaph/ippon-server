@@ -1,5 +1,7 @@
 // Create WebSocket connection.
-const socket = new WebSocket("ws://localhost:3000");
+const host = location.origin.replace(/^http/, 'ws');
+const socket = new WebSocket(host);
+// const socket = new WebSocket("ws://localhost:3000");
 
 // Connection opened
 socket.addEventListener("open", (event) => {
