@@ -59,14 +59,23 @@ app.use((req, res, next) => {
 app.post('/login', (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
-  if (username === 'admin' && password === 'password') {
+  if (username === 'result' && password === '1234') {
     req.session.regenerate((err) => {
       if (err) {
         console.log(err);
       }
-      req.session.username = 'admin';
-      res.redirect('/result'); // Changed from '/index.html' to '/'
-      console.log("ログイン済み");
+      req.session.username = 'result';
+      res.redirect('/result'); 
+      console.log("result user has logged in...");
+    });
+  } else if (username === 'vote' && password === '1234'){
+    req.session.regenerate((err) => {
+      if (err) {
+        console.log(err);
+      }
+      req.session.username = 'vote';
+      res.redirect('/vote'); 
+      console.log("vote user has logged in...");
     });
   } else {
     res.redirect('/login');
