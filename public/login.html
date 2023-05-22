@@ -20,19 +20,15 @@
 	    </div>
   	</div>
 
-    <form th:action="@{/login}" th:object="${loginInfo}" method="POST">
+      <form method="POST" action="/login">
         <div>
             <label for="username">Username:</label>
-            <input type="text" th:field="*{username}" required />
+            <input type="text" name="username" required />
         </div>
         <div>
             <label for="password">Password:</label>
-            <input type="password" th:field="*{password}" required />
+            <input type="password" name="password" required />
         </div>
-        
-        <th:block th:if="${errorMessage != null}">
-	        	<p class="error-message" th:text="${errorMessage}"></p>
-	    </th:block>
 	    
         <div>
             <input type="submit" value="Login" />
