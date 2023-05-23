@@ -1,0 +1,62 @@
+:root {
+    --bg-color: black;
+    --border-color: yellow;
+    --btn-bg-color: yellow;
+    --btn-txt-color: black;
+    --btn-hover-bg-color: black;
+    --btn-hover-txt-color: yellow;
+    --rectangle-width: 200px;
+    --rectangle-height: 400px;
+    --border-width: 5px;
+    --btn-padding: 15px 32px;
+    --btn-font-size: 16px;
+    --btn-margin: 4px 2px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    gap: 20px;
+}
+
+.rectangle {
+    width: var(--rectangle-width);
+    height: var(--rectangle-height);
+    border: var(--border-width) solid var(--border-color);
+    display: grid;
+    grid-template-rows: 1fr auto 1fr;
+}
+
+.separator {
+    border-top: var(--border-width) solid var(--border-color);
+    width: 100%;
+}
+
+#upperHalf, #lowerHalf {
+    width: 100%;
+    height: calc((var(--rectangle-height) - var(--border-width)*2 - var(--border-width))/2);
+}
+
+#vote_button {
+    background-color: var(--btn-bg-color);
+    border: none;
+    color: var(--btn-txt-color);
+    padding: var(--btn-padding);
+    text-align: center;
+    text-decoration: none;
+    font-size: var(--btn-font-size);
+    margin: var(--btn-margin);
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#vote_button:hover {
+    background-color: var(--btn-hover-bg-color);
+    color: var(--btn-hover-txt-color);
+}

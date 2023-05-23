@@ -27,14 +27,27 @@ app.use(express.urlencoded({ extended: false}));
 
 //Websocket処理
 const wss  = new WebSocket.Server({ server:server });
+let clients = [];
 
 wss.on('connection', function connection(ws) {
+  clients.push(ws);
   console.log("A new client Connected!");
-  ws.send("Welcome New Client!");
+  ws.send("Connected:Welcome!");
 
   ws.on('message', function message(data) {
     console.log('received: %s', data);
-    ws.send("Got your msg!! " + data);
+    // ws.send("Received:Vote" + data);
+
+    // Broadcasting to all clients
+    clients.forEach(client => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send("Received:Vote");
+      }
+    });
+  });
+
+  ws.on('close', function close() {
+    clients = clients.filter(client => client !== ws);
   });
 });
 

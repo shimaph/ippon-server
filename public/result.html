@@ -19,47 +19,6 @@
         <div class="circle-9 circle"></div>
         <div class="circle-10 circle"></div>
     </div>
-    
-    <button class="fill-button">塗りつぶす</button>
-
-    <script>
-        const websocket = new WebSocket('ws://localhost:8080/websocket');
-        const fillButton = document.querySelector('.fill-button');
-        const circles = document.querySelectorAll('.circle');
-
-        websocket.onmessage = (event) => {
-            const messageType = event.data.split('-')[0];
-            const circleNumber = parseInt(event.data.split('-')[2]);
-
-            if (messageType === 'display' && circleNumber >= 1 && circleNumber <= 10) {
-                circles[circleNumber - 1].style.borderTop = 'solid rgb(250, 221, 1) 25px';
-                circles[circleNumber - 1].style.borderRight = 'solid rgb(192, 169, 1) 25px';
-                circles[circleNumber - 1].style.borderLeft = 'solid rgb(239, 209, 1) 25px';
-                circles[circleNumber - 1].style.borderBottom = 'solid rgb(192, 169, 1) 25px';
-                
-                const music = new Audio('musics/'+ circleNumber +'.mp3');
-                music.play();
-            }
-             
-        };
-        
-        
-        //映像に関する実装
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then((stream) => {
-                    video.srcObject = stream;
-                })
-                .catch((err) => {
-                    console.error('An error occurred: ' + err);
-                });
-        } else {
-            console.error('getUserMedia not supported');
-        }
-
-        fillButton.addEventListener('click', () => {
-            websocket.send('fill-next-circle');
-        });
-    </script>
+    <script src="js/result.js"></script>
 </body>
 </html>
