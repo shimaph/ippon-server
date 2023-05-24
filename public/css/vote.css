@@ -1,6 +1,6 @@
 :root {
     --bg-color: black;
-    --border-color: yellow;
+    --border-color: rgb(192, 169, 1);
     --btn-bg-color: yellow;
     --btn-txt-color: black;
     --btn-hover-bg-color: black;
@@ -30,18 +30,23 @@ body {
     height: var(--rectangle-height);
     border: var(--border-width) solid var(--border-color);
     display: grid;
-    grid-template-rows: 1fr auto 1fr;
+    grid-template-rows: 1fr var(--border-width) 1fr var(--border-width) 1fr;
 }
 
 .separator {
     border-top: var(--border-width) solid var(--border-color);
     width: 100%;
+    height: 0; /* Add this line */
 }
 
-#upperHalf, #lowerHalf {
+#upperHalf, #middleHalf, #lowerHalf {
     width: 100%;
-    height: calc((var(--rectangle-height) - var(--border-width)*2 - var(--border-width))/2);
+    /* Remove height specification */
 }
+
+
+
+
 
 #vote_button {
     background-color: var(--btn-bg-color);

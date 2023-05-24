@@ -4,10 +4,14 @@ const vote_Button = document.getElementById('vote_button');
 
 vote_Button.addEventListener("click", function() {
     var lowerHalf = document.getElementById("lowerHalf");
+    var middleHalf = document.getElementById("middleHalf");
     var upperHalf = document.getElementById("upperHalf");
 
     if (!lowerHalf.style.backgroundColor) {
         lowerHalf.style.backgroundColor = "yellow";
+        websocket.send('VOTE');
+    } else if (!middleHalf.style.backgroundColor) {
+        middleHalf.style.backgroundColor = "yellow";
         websocket.send('VOTE');
     } else if (!upperHalf.style.backgroundColor) {
         upperHalf.style.backgroundColor = "yellow";
