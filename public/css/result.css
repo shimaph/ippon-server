@@ -3,8 +3,8 @@ body {
 }
 
 .video {
-	width: 590px;
-    height: 590px;
+	width: 650px;
+    height: 650px;
 	border-radius: 50% / 10%;
 	object-fit: cover;
 	box-sizing: border-box;
@@ -18,6 +18,19 @@ body {
     height: 100vh;
 }
 
+.outer-circle {
+    width: 650px;
+    height: 650px;
+    position: absolute;
+    border-top: solid rgb(250, 221, 1) 25px;
+    border-right: solid rgb(192, 169, 1) 25px;
+    border-bottom: solid rgb(192, 169, 1) 25px;
+    border-left: solid rgb(239, 209, 1) 25px;
+    border-radius: 50% / 10%;
+    box-sizing: border-box;
+    background-color: transparent;
+}
+
 .circle {
     background-color: transparent;
 }
@@ -26,10 +39,6 @@ body {
     width: 590px;
     height: 590px;
     position: absolute;
-    border-top: solid rgb(250, 221, 1) 25px;
-    border-right: solid rgb(192, 169, 1) 25px;
-    border-bottom: solid rgb(192, 169, 1) 25px;
-    border-left: solid rgb(239, 209, 1) 25px;
     border-radius: 50% / 10%;
     box-sizing: border-box;
     background-color: transparent;

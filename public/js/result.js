@@ -40,7 +40,7 @@ websocket.onmessage = (event) => {
         //ippon音声再生処理
         console.log(point_counter);
 
-        if(point_counter === 8) {
+        if(point_counter === 9) {
             function sleep(ms) {
                 return new Promise(resolve => setTimeout(resolve, ms));
               }
