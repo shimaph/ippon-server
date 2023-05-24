@@ -20,20 +20,22 @@ const websocket = new WebSocket(host);
 const circles = document.querySelectorAll('.circle');
 let point_counter = 0;
 
-console.log("hey!!");
+
 
 websocket.onmessage = (event) => {
-    console.log('received: %s', event.data);
+    console.log(event.data);
 
+    if (event.data === "VOTE" && point_counter >= 0 && point_counter < 10) {
+        let circle = circles[point_counter];
 
-    const messageType = event.data.split(':')[0];
+        circle.style.borderWidth = '25px';
+        circle.style.borderStyle = 'solid';
+        circle.style.borderTopColor = 'rgb(250, 221, 1)';
+        circle.style.borderRightColor = 'rgb(192, 169, 1)';
+        circle.style.borderLeftColor = 'rgb(239, 209, 1)';
+        circle.style.borderBottomColor = 'rgb(192, 169, 1)';
 
-    if (messageType === 'Received' && point_counter >= 0 && point_counter < 10) {
-        circles[point_counter].style.borderTop = 'solid rgb(250, 221, 1) 25px';
-        circles[point_counter].style.borderRight = 'solid rgb(192, 169, 1) 25px';
-        circles[point_counter].style.borderLeft = 'solid rgb(239, 209, 1) 25px';
-        circles[point_counter].style.borderBottom = 'solid rgb(192, 169, 1) 25px';
-        
+        //sound再生
         let sound = new Audio('sounds/'+ (point_counter + 1) +'.mp3');
         sound.play();
 
@@ -63,12 +65,16 @@ websocket.onmessage = (event) => {
 document.getElementById('confirm-button').addEventListener('click', function() {
     if (this.innerHTML === '確定') {
         this.innerHTML = 'リセット';
+
+    //リセット処理
     } else {
+        websocket.send('RESET');
         point_counter = 0;
         let circleElements = document.getElementsByClassName('circle');
         for (let i = 0; i < circleElements.length; i++) {
             let circleElement = circleElements[i];
-            circleElement.style.display = "none";
+            circleElement.style.border = 'none';
+
         }
 
         this.innerHTML = '確定';

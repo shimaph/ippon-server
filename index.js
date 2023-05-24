@@ -36,12 +36,15 @@ wss.on('connection', function connection(ws) {
 
   ws.on('message', function message(data) {
     console.log('received: %s', data);
-    // ws.send("Received:Vote" + data);
-
+    ws.send("Received:" + data);
     // Broadcasting to all clients
     clients.forEach(client => {
       if (client.readyState === WebSocket.OPEN) {
-        client.send("Received:Vote");
+        if (data == "VOTE") {
+          client.send("VOTE");
+        } else if (data == "RESET") {
+          client.send("RESET");
+        }
       }
     });
   });
