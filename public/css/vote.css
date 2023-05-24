@@ -54,6 +54,8 @@ body {
     margin: var(--btn-margin);
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'DotGothic16', sans-serif;
+    font-weight: bold;
 }
 
 #vote_button:hover {
