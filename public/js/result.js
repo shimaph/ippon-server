@@ -110,6 +110,9 @@ document.getElementById('confirm-button').addEventListener('click', function() {
         document.querySelector('.point').innerHTML = '';
         document.querySelector('.point').appendChild(imgElement);
 
+        const ipponSound = new Audio('sounds/noppon.mp3');
+        ipponSound.play();
+        
         this.innerHTML = 'リセット';
 
     //リセット処理
