@@ -125,6 +125,40 @@ body {
     box-sizing: border-box;
 }
 
+.point img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(5%, 5%) rotate(15deg);
+    opacity: 0.9;
+    width: 230px;
+    height: 230px;
+    z-index: 999;
+}
+
+.point div.ippon-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0.98;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 200px;
+    z-index: 999;
+    background-color: rgb(250, 221, 1);
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    font-weight: bold;
+    font-family: 'Anton', sans-serif;
+    border-radius: 5px;
+    transition: background-color 1s;
+}
+
+
+
 #confirm-button {
     background-color: rgb(250, 221, 1); /* 黄色 */
     color: #000000; /* 黒 */

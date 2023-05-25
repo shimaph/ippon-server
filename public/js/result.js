@@ -40,21 +40,60 @@ websocket.onmessage = (event) => {
         sound.play();
 
         //ippon音声再生処理
-        console.log(point_counter);
-
-        if(point_counter === 9) {
+        if(point_counter === 9) { 
             function sleep(ms) {
                 return new Promise(resolve => setTimeout(resolve, ms));
-              }
+            }
               
-              sleep(2000);
-              const ipponSound = new Audio('sounds/ippon.mp3');
-              ipponSound.play();
+            sleep(2000);
+            const ipponSound = new Audio('sounds/ippon.mp3');
+            ipponSound.play();
 
+            let divElement = document.createElement('div');
+            divElement.className = 'ippon-content';
+            divElement.innerText = 'IPPON';
+            divElement.style.backgroundColor = '#fff';
+            divElement.style.transition = 'background-color 1s';
+            document.querySelector('.point').innerHTML = '';
+            document.querySelector('.point').appendChild(divElement);
+
+            setTimeout(() => {
+            divElement.style.backgroundColor = 'rgb(250, 221, 1)';
+            }, 100);
+
+
+            //IPPONアニメーション
+            // circles配列を逆順にする
+            let reversedCircles = Array.from(circles).reverse();
+        
+            reversedCircles.forEach((circle, index) => {
+                circle.style.transition = 'border 0.5s ease-in-out';
+                setTimeout(() => {
+                    circle.style.border = '25px solid #fff';       
+                }, index * 50);  
+
+                setTimeout(() => {
+                    circle.style.borderWidth = '25px';
+                    circle.style.borderStyle = 'solid';
+                    circle.style.borderTopColor = 'rgb(250, 221, 1)';
+                    circle.style.borderRightColor = 'rgb(192, 169, 1)';
+                    circle.style.borderLeftColor = 'rgb(239, 209, 1)';
+                    circle.style.borderBottomColor = 'rgb(192, 169, 1)';;
+                }, (index + 1) * 100);
+
+                circle.style.transition = "none";
+            });
+
+            
+
+        
+            //ippon時は確定の処理が要らないので、切り替え
+            document.getElementById('confirm-button').innerHTML = 'リセット';
         }
         
 
         point_counter ++;
+        websocket.send(point_counter);
     }
         
 };
@@ -64,6 +103,13 @@ websocket.onmessage = (event) => {
 //確定/リセットボタンに関する処理
 document.getElementById('confirm-button').addEventListener('click', function() {
     if (this.innerHTML === '確定') {
+        
+        // 画像表示処理
+        let imgElement = document.createElement('img');
+        imgElement.src = 'img/image_' + point_counter + '.png';
+        document.querySelector('.point').innerHTML = '';
+        document.querySelector('.point').appendChild(imgElement);
+
         this.innerHTML = 'リセット';
 
     //リセット処理
@@ -74,8 +120,10 @@ document.getElementById('confirm-button').addEventListener('click', function() {
         for (let i = 0; i < circleElements.length; i++) {
             let circleElement = circleElements[i];
             circleElement.style.border = 'none';
-
         }
+
+        // Reset image
+        document.querySelector('.point').innerHTML = '';
 
         this.innerHTML = '確定';
     }

@@ -27,6 +27,7 @@ websocket.onmessage = (event) => {
     //RESET処理
     if(event.data === "RESET"){
         lowerHalf.style.backgroundColor = null;
+        middleHalf.style.backgroundColor = null;
         upperHalf.style.backgroundColor = null;
     }
 };
