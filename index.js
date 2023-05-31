@@ -6,6 +6,7 @@ const app = express()
 const server = require("http").createServer(app);
 const WebSocket = require("ws");
 
+
 //謎まじない(認証用)
 const sess = {
   secret: 'secretsecretsecret',
@@ -30,13 +31,11 @@ const wss  = new WebSocket.Server({ server:server });
 let clients = [];
 
 wss.on('connection', function connection(ws) {
+
   clients.push(ws);
-  console.log("A new client Connected!");
-  ws.send("Connected:Welcome!");
 
   ws.on('message', function message(data) {
-    console.log('received: %s', data);
-    ws.send("Received:" + data);
+
     // Broadcasting to all clients
     clients.forEach(client => {
       if (client.readyState === WebSocket.OPEN) {
