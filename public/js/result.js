@@ -142,6 +142,7 @@ document.getElementById('confirm-button').addEventListener('click', function() {
         
         this.innerHTML = 'リセット';
 
+        
     //リセット処理
     } else {
         websocket.send('RESET');
