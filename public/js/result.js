@@ -1,3 +1,14 @@
+//読み込み系
+const nopponSound = new Audio('sounds/noppon.mp3');
+const ipponSound = new Audio('sounds/ippon.mp3');
+const sounds = Array.from({ length: 10 }, (_, i) => new Audio(`sounds/${i+1}.mp3`));
+const images = Array.from({ length: 10 }, (_, i) => {
+    let img = new Image();
+    img.src = 'img/image_' + (i) + '.png';
+    return img;
+  });
+
+
 //映像に関する実装
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices.getUserMedia({ video: true })
@@ -15,15 +26,20 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 
 
 //投票反映実装(websocket)
+let websocket;
 const host = location.origin.replace(/^http/, 'ws');
-const websocket = new WebSocket(host);
 const circles = document.querySelectorAll('.circle');
 let point_counter = 0;
 
+function connect() {
+    websocket = new WebSocket(host);
 
+    websocket.onopen = () => {
+        console.log('WebSocket is connected.');
+    };
 
-websocket.onmessage = (event) => {
-    console.log(event.data);
+    websocket.onmessage = (event) => {
+        console.log(event.data);
 
     if (event.data === "VOTE" && point_counter >= 0 && point_counter < 10) {
         let circle = circles[point_counter];
@@ -36,19 +52,18 @@ websocket.onmessage = (event) => {
         circle.style.borderBottomColor = 'rgb(192, 169, 1)';
 
         //sound再生
-        let sound = new Audio('sounds/'+ (point_counter + 1) +'.mp3');
-        sound.play();
+        sounds[point_counter].play();
 
-        //ippon音声再生処理
+        //IPPON処理
         if(point_counter === 9) { 
             function sleep(ms) {
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
               
             sleep(2000);
-            const ipponSound = new Audio('sounds/ippon.mp3');
             ipponSound.play();
 
+            //IPPON表示
             let divElement = document.createElement('div');
             divElement.className = 'ippon-content';
             divElement.innerText = 'IPPON';
@@ -98,20 +113,32 @@ websocket.onmessage = (event) => {
         
 };
 
+websocket.onclose = function(e) {
+    console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
+    setTimeout(function() {
+        connect();
+    }, 1000);
+};
+
+websocket.onerror = function(err) {
+    console.error('Socket encountered error: ', err.message, 'Closing socket');
+    websocket.close();
+};
+}
+
+connect();
 
 
 //確定/リセットボタンに関する処理
 document.getElementById('confirm-button').addEventListener('click', function() {
     if (this.innerHTML === '確定') {
         
-        // 画像表示処理
-        let imgElement = document.createElement('img');
-        imgElement.src = 'img/image_' + point_counter + '.png';
+        // 画像表示
         document.querySelector('.point').innerHTML = '';
-        document.querySelector('.point').appendChild(imgElement);
+        document.querySelector('.point').appendChild(images[point_counter]);
 
-        const ipponSound = new Audio('sounds/noppon.mp3');
-        ipponSound.play();
+        // noppon再生
+        nopponSound.play();
         
         this.innerHTML = 'リセット';
 
