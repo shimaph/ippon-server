@@ -133,6 +133,8 @@ connect();
 document.getElementById('confirm-button').addEventListener('click', function() {
     if (this.innerHTML === '確定') {
         
+        websocket.send('STOP');
+
         // 画像表示
         document.querySelector('.point').innerHTML = '';
         document.querySelector('.point').appendChild(images[point_counter]);

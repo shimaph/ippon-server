@@ -39,6 +39,8 @@ wss.on('connection', function connection(ws) {
           client.send("VOTE");
         } else if (data == "RESET") {
           client.send("RESET");
+        } else if (data == "STOP") {
+          client.send("STOP");
         }
       }
     });

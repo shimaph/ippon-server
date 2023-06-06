@@ -1,6 +1,7 @@
 let websocket;
 const host = location.origin.replace(/^http/, 'ws');
 const vote_Button = document.getElementById('vote_button');
+let mode = "GO";
 
 function connect() {
     websocket = new WebSocket(host);
@@ -21,6 +22,11 @@ function connect() {
             lowerHalf.style.backgroundColor = null;
             middleHalf.style.backgroundColor = null;
             upperHalf.style.backgroundColor = null;
+            mode = "GO";
+        }
+
+        if(event.data === "STOP"){
+            mode = "STOP";
         }
     };
 
@@ -40,6 +46,9 @@ function connect() {
 connect();
 
 vote_Button.addEventListener("click", function() {
+    if(mode == "STOP"){
+        return;
+    }
     var lowerHalf = document.getElementById("lowerHalf");
     var middleHalf = document.getElementById("middleHalf");
     var upperHalf = document.getElementById("upperHalf");
