@@ -1,27 +1,40 @@
 //読み込み系
 const nopponSound = new Audio('sounds/noppon.mp3');
 const ipponSound = new Audio('sounds/ippon.mp3');
+const ipponVoice = new Audio('sounds/voice.mp3');
 const sounds = Array.from({ length: 10 }, (_, i) => new Audio(`sounds/${i+1}.mp3`));
 const images = Array.from({ length: 10 }, (_, i) => {
     let img = new Image();
     img.src = 'img/image_' + (i) + '.png';
     return img;
   });
-
+const outerCircle = document.querySelector(".outer-circle");
 
 //映像に関する実装
-if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({ video: true })
-        .then((stream) => {
-            video.srcObject = stream;
-        })
-        .catch((err) => {
-            console.error('An error occurred: ' + err);
-        });
-} else {
-    console.error('getUserMedia not supported');
-}
+// if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+//     navigator.mediaDevices.getUserMedia({ video: true })
+//         .then((stream) => {
+//             video.srcObject = stream;
+//         })
+//         .catch((err) => {
+//             console.error('An error occurred: ' + err);
+//         });
+// } else {
+//     console.error('getUserMedia not supported');
+// }
 
+document.getElementById('text-form').addEventListener('submit', function(e) {
+    e.preventDefault(); // フォームの送信を防止
+
+    const text = document.getElementById('text-input').value;
+
+    // outer-circle 内のテキストを更新
+    const displayTextElement = document.getElementById('display-text');
+    displayTextElement.textContent = text;
+
+    // テキスト入力欄をクリア
+    document.getElementById('text-input').value = '';
+});
 
 
 
@@ -42,6 +55,11 @@ function connect() {
         console.log(event.data);
 
     if (event.data === "VOTE" && point_counter >= 0 && point_counter < 10) {
+
+        if (outerCircle.style.backgroundColor !== "transparent") {
+            outerCircle.style.backgroundColor = "transparent";
+        }
+
         let circle = circles[point_counter];
 
         circle.style.borderWidth = '25px';
@@ -52,6 +70,7 @@ function connect() {
         circle.style.borderBottomColor = 'rgb(192, 169, 1)';
 
         //sound再生
+        console.log(point_counter);
         sounds[point_counter].play();
 
         //IPPON処理
@@ -62,6 +81,7 @@ function connect() {
               
             sleep(2000);
             ipponSound.play();
+            ipponVoice.play();
 
             //IPPON表示
             let divElement = document.createElement('div');
@@ -158,6 +178,9 @@ document.getElementById('confirm-button').addEventListener('click', function() {
         // Reset image
         document.querySelector('.point').innerHTML = '';
 
+        //黄色にする
+        outerCircle.style.backgroundColor = "#ffd700";
+    
         this.innerHTML = '確定';
     }
 });

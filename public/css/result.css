@@ -28,7 +28,10 @@ body {
     border-left: solid rgb(239, 209, 1) 25px;
     border-radius: 50% / 10%;
     box-sizing: border-box;
-    background-color: transparent;
+    background-color: #ffd700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .circle {
@@ -125,12 +128,78 @@ body {
     box-sizing: border-box;
 }
 
+
+
+
+.centered-text {
+    color: #000;
+    font-size: 4rem;
+    font-weight: bold;
+    font-family: "Hiragino Sans","ヒラギノ角ゴシック"; font-weight: 900;
+    text-align: center;
+    max-width: 80%;
+    max-height: 80%;
+    word-wrap: break-word;
+    position: absolute;
+}
+
+#confirm-button {
+    background-color: rgb(250, 221, 1); /* 黄色 */
+    color: #000000; /* 黒 */
+    border: none;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'DotGothic16', sans-serif;
+    font-weight: bold;
+}
+
+#confirm-button:hover {
+    background-color: rgb(239, 209, 1); /* 黄色（少し暗め） */
+    color: white;
+}
+
+form#text-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+form#text-form input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px;
+    margin-bottom: 10px;
+}
+
+form#text-form button {
+    background-color: #ffd700;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'DotGothic16', sans-serif;
+}
+
+form#text-form button:hover {
+    background-color: rgb(239, 209, 1);
+    color: #fff;
+}
+
 .point img {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(5%, 5%) rotate(15deg);
-    opacity: 0.9;
+    /* opacity: 0.9; */
     width: 230px;
     height: 230px;
     z-index: 999;
@@ -155,41 +224,4 @@ body {
     font-family: 'Anton', sans-serif;
     border-radius: 5px;
     transition: background-color 1s;
-}
-
-
-
-#confirm-button {
-    background-color: rgb(250, 221, 1); /* 黄色 */
-    color: #000000; /* 黒 */
-    border: none;
-    padding: 15px 30px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-    margin: 4px 2px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border-radius: 5px;
-    font-family: 'DotGothic16', sans-serif;
-    font-weight: bold;
-  }
-  
-  #confirm-button:hover {
-    background-color: rgb(239, 209, 1); /* 黄色（少し暗め） */
-    color: white;
-  }
-  
-
-@keyframes pulse {
-    0% {
-        transform: scale(0.9);
-    }
-    50% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(0.9);
-    }
 }

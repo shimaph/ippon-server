@@ -14,8 +14,10 @@
 </head>
 <body>
     <div class="wrapper">
-    	<video class="video" id="video" autoplay playsinline></video>
-        <div class="outer-circle"></div>
+    	<!-- <video class="video" id="video" autoplay playsinline></video> -->
+        <div class="outer-circle">
+            <div id="display-text" class="centered-text"></div> <!-- 文字列を表示する要素を追加 -->
+        </div>
         <div class="circle-1 circle"></div>
         <div class="circle-2 circle"></div>
         <div class="circle-3 circle"></div>
@@ -30,6 +32,12 @@
     </div>
 
     <button id="confirm-button">確定</button>
+
+    <form id="text-form">
+        <input type="text" id="text-input" placeholder="ここに文字を入力してください" />
+        <button type="submit">送信</button>
+    </form>
+
     <script src="js/result.js"></script>
 </body>
 </html>
