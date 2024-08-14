@@ -10,7 +10,7 @@
     --rectangle-width: 300px;
     --rectangle-height: 500px;
     --border-width: 2px;
-    --btn-padding: 12px 30px;
+    --btn-padding: 20px 0; /* 縦のパディングを増加 */
     --btn-font-size: 1.2rem;
     --btn-margin: 20px 0;
 }
@@ -79,8 +79,9 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(255, 215, 0, 0.1);
-    font-family: 'Roboto', sans-serif;  /* GOボタンと同じフォント */
+    font-family: 'Roboto', sans-serif;
     margin-top: 2rem;
+    width: calc(100% - 40px); /* コンテナの幅に合わせつつ余白を確保 */
 }
 
 #vote_button:hover {
@@ -109,7 +110,8 @@ h1 {
     }
 
     #vote_button {
-        padding: 10px 25px;
+        padding: 50px 0; /* 縦のパディングを調整 */
         font-size: 1rem;
+        width: calc(100% - 20px); /* モバイルでも余白を確保しつつ幅を調整 */
     }
 }
