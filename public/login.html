@@ -16,26 +16,23 @@
 <body>
   <div class="wrapper">
   	<div class="h1_animation">
-    <h1>大大喜利大会  春の陣</h1>
-	    <div class="container">
-	      <img class="sakura" src="img/sakura.jpeg">
-	    </div>
+    <h1>大喜利大会<br>夏の陣</h1>
   	</div>
 
       <form method="POST" action="/login">
-        <div>
+        <div class="form-group">
           <label class="switch">
             <input type="checkbox" id="toggleButton" name="toggle" value="on">
             <span class="slider"></span>
           </label>
         </div>
-        <div>
-            <label for="password">pass:</label>
+        <div class="form-group">
+            <label for="password">パスワード入力:</label>
             <input type="password" name="password" required />
         </div>
 	    
-        <div>
-            <input type="submit" value="Login" />
+        <div class="form-group">
+            <input class="go-button" type="submit" value="Login" />
         </div>
     </form>
   </div>
