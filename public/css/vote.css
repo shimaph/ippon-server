@@ -1,16 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 :root {
-    --bg-color: black;
-    --border-color: rgb(192, 169, 1);
-    --btn-bg-color: yellow;
-    --btn-txt-color: black;
-    --btn-hover-bg-color: black;
-    --btn-hover-txt-color: yellow;
-    --rectangle-width: 200px;
-    --rectangle-height: 400px;
-    --border-width: 5px;
-    --btn-padding: 15px 32px;
-    --btn-font-size: 16px;
-    --btn-margin: 4px 2px;
+    --bg-color: #1a1a1a;
+    --border-color: #ffd700;
+    --btn-bg-color: #ffd700;
+    --btn-txt-color: #1a1a1a;
+    --btn-hover-bg-color: #1a1a1a;
+    --btn-hover-txt-color: #ffd700;
+    --rectangle-width: 300px;
+    --rectangle-height: 500px;
+    --border-width: 2px;
+    --btn-padding: 12px 30px;
+    --btn-font-size: 1.2rem;
+    --btn-margin: 20px 0;
 }
 
 *, *::before, *::after {
@@ -19,10 +21,15 @@
 
 body {
     background-color: var(--bg-color);
-    display: grid;
-    place-items: center;
-    height: 100vh;
-    gap: 20px;
+    color: var(--border-color);
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .rectangle {
@@ -31,39 +38,78 @@ body {
     border: var(--border-width) solid var(--border-color);
     display: grid;
     grid-template-rows: 1fr var(--border-width) 1fr var(--border-width) 1fr;
+    background-color: rgba(255, 215, 0, 0.1);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .separator {
     border-top: var(--border-width) solid var(--border-color);
     width: 100%;
-    height: 0; /* Add this line */
+    height: 0;
 }
 
 #upperHalf, #middleHalf, #lowerHalf {
     width: 100%;
-    /* Remove height specification */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-size: 1.2rem;
+    text-align: center;
 }
 
-
-
-
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: var(--btn-margin) 0;
+}
 
 #vote_button {
     background-color: var(--btn-bg-color);
-    border: none;
     color: var(--btn-txt-color);
+    border: none;
     padding: var(--btn-padding);
-    text-align: center;
-    text-decoration: none;
     font-size: var(--btn-font-size);
-    margin: var(--btn-margin);
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    font-family: 'DotGothic16', sans-serif;
     font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(255, 215, 0, 0.1);
+    font-family: 'Roboto', sans-serif;  /* GOボタンと同じフォント */
+    margin-top: 2rem;
 }
 
 #vote_button:hover {
     background-color: var(--btn-hover-bg-color);
     color: var(--btn-hover-txt-color);
+    box-shadow: 0 6px 8px rgba(255, 215, 0, 0.2);
+}
+
+h1 {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.3);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    :root {
+        --rectangle-width: 90vw;
+        --rectangle-height: 70vh;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    #vote_button {
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
 }
