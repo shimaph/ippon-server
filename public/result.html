@@ -33,11 +33,41 @@
 
     <button id="confirm-button">確定</button>
 
+    <!-- お題入力の開閉トグル（普段は入力欄を隠しておく） -->
+    <button id="topic-toggle" type="button" aria-label="お題を入力">✏️ お題を入力</button>
+
     <form id="text-form">
         <input type="text" id="text-input" placeholder="ここに文字を入力してください" />
         <button type="submit">送信</button>
     </form>
 
     <script src="js/result.js"></script>
+    <script>
+      // お題入力欄の開閉制御（result.js の送信処理には手を加えない）
+      (function () {
+        var toggle = document.getElementById('topic-toggle');
+        var form = document.getElementById('text-form');
+        var input = document.getElementById('text-input');
+        function open() {
+          document.body.classList.add('topic-open');
+          toggle.setAttribute('aria-expanded', 'true');
+          if (input) input.focus();
+        }
+        function close() {
+          document.body.classList.remove('topic-open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+        toggle.addEventListener('click', function () {
+          if (document.body.classList.contains('topic-open')) close();
+          else open();
+        });
+        // 送信したら自動で閉じる
+        if (form) form.addEventListener('submit', close);
+        // Escで閉じる
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') close();
+        });
+      })();
+    </script>
 </body>
 </html>

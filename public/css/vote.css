@@ -1,53 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+/* ============================================================
+   ippon — vote  (modern theme)
+   NOTE: #upperHalf / #middleHalf / #lowerHalf / #vote_button の
+   ID・構造は不変。JS が背景色を書き換えるので配色は非破壊。
+   ============================================================ */
 
 :root {
-    --bg-color: #1a1a1a;
-    --border-color: #ffd700;
-    --btn-bg-color: #ffd700;
-    --btn-txt-color: #1a1a1a;
-    --btn-hover-bg-color: #1a1a1a;
-    --btn-hover-txt-color: #ffd700;
-    --rectangle-width: 300px;
-    --rectangle-height: 500px;
-    --border-width: 2px;
-    --btn-padding: 20px 0; /* 縦のパディングを増加 */
-    --btn-font-size: 1.2rem;
-    --btn-margin: 20px 0;
+    --bg-0: #0c0b0a;
+    --bg-1: #16130d;
+    --gold: #ffd54a;
+    --gold-soft: #f5b301;
+    --ink: #0c0b0a;
+    --border-color: rgba(255, 213, 74, .35);
+    --rectangle-width: 320px;
+    --rectangle-height: 520px;
+    --ease: cubic-bezier(.22, 1, .36, 1);
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--border-color);
-    font-family: 'Roboto', sans-serif;
     margin: 0;
-    padding: 0;
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    gap: 2rem;
+    padding: 24px;
+    color: var(--gold);
+    font-family: 'Noto Sans JP', system-ui, sans-serif;
+    background:
+        radial-gradient(120% 80% at 50% -10%, rgba(255, 213, 74, .16), transparent 55%),
+        linear-gradient(160deg, var(--bg-1), var(--bg-0) 70%);
+    overflow: hidden;
 }
 
 .rectangle {
     width: var(--rectangle-width);
     height: var(--rectangle-height);
-    border: var(--border-width) solid var(--border-color);
     display: grid;
-    grid-template-rows: 1fr var(--border-width) 1fr var(--border-width) 1fr;
-    background-color: rgba(255, 215, 0, 0.1);
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
-    border-radius: 10px;
+    grid-template-rows: 1fr 1px 1fr 1px 1fr;
+    border: 1px solid var(--border-color);
+    border-radius: 22px;
     overflow: hidden;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .02));
+    box-shadow:
+        0 30px 70px -30px rgba(0, 0, 0, .85),
+        inset 0 1px 0 rgba(255, 255, 255, .08),
+        0 0 60px -20px rgba(255, 200, 40, .25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    animation: rise .6s var(--ease) both;
+}
+
+@keyframes rise {
+    from { opacity: 0; transform: translateY(16px) scale(.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .separator {
-    border-top: var(--border-width) solid var(--border-color);
     width: 100%;
-    height: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-color), transparent);
 }
 
 #upperHalf, #middleHalf, #lowerHalf {
@@ -56,62 +72,47 @@ body {
     justify-content: center;
     align-items: center;
     padding: 10px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     text-align: center;
-}
-
-.button-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin: var(--btn-margin) 0;
+    /* JS が backgroundColor を書き換えるので色遷移だけ滑らかに */
+    transition: background-color .3s var(--ease);
 }
 
 #vote_button {
-    background-color: var(--btn-bg-color);
-    color: var(--btn-txt-color);
+    width: min(90vw, 560px);
+    padding: 1.25rem 0;
     border: none;
-    padding: var(--btn-padding);
-    font-size: var(--btn-font-size);
-    font-weight: bold;
+    border-radius: 999px;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: .28em;
     text-transform: uppercase;
-    border-radius: 5px;
+    color: var(--ink);
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(255, 215, 0, 0.1);
-    font-family: 'Roboto', sans-serif;
-    margin-top: 2rem;
-    width: calc(100% - 40px); /* コンテナの幅に合わせつつ余白を確保 */
+    background: linear-gradient(180deg, #ffe27a, var(--gold-soft));
+    box-shadow:
+        0 16px 34px -12px rgba(255, 190, 30, .75),
+        inset 0 1px 0 rgba(255, 255, 255, .55);
+    transition: transform .15s var(--ease), box-shadow .25s var(--ease), filter .2s var(--ease);
+    -webkit-tap-highlight-color: transparent;
 }
 
 #vote_button:hover {
-    background-color: var(--btn-hover-bg-color);
-    color: var(--btn-hover-txt-color);
-    box-shadow: 0 6px 8px rgba(255, 215, 0, 0.2);
+    filter: brightness(1.05);
+    box-shadow: 0 22px 40px -12px rgba(255, 190, 30, .85), inset 0 1px 0 rgba(255, 255, 255, .55);
 }
 
-h1 {
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.3);
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
+#vote_button:active { transform: scale(.96); }
 
 @media (max-width: 480px) {
     :root {
-        --rectangle-width: 90vw;
-        --rectangle-height: 70vh;
+        --rectangle-width: 86vw;
+        --rectangle-height: 64vh;
     }
-
-    h1 {
-        font-size: 2rem;
-    }
-
     #vote_button {
-        padding: 50px 0; /* 縦のパディングを調整 */
-        font-size: 1rem;
-        width: calc(100% - 20px); /* モバイルでも余白を確保しつつ幅を調整 */
+        width: 86vw;
+        padding: 1.5rem 0;
+        font-size: 1.15rem;
     }
 }
